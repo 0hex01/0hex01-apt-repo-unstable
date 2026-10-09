@@ -1,0 +1,92 @@
+name: Update APT Index
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# only one index run at a time - a newer push supersedes the pending one
+concurrency:
+  group: update-index
+  cancel-in-progress: true
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dpkg-dev
+        run: sudo apt-get install -y dpkg-dev gpg
+
+      - name: Import signing key
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.APT_REPO_SIGNING_KEY }}
+        run: |
+          mkdir -p ~/.gnupg && chmod 700 ~/.gnupg
+          printf '%s' "$GPG_PRIVATE_KEY" | gpg --batch --import
+
+      - name: Update index and push
+        run: |
+          set -e
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          for i in 1 2 3; do
+            # sync to newest remote first - the only files we ever change are
+            # generated index files, so hard-resetting to remote is safe and
+            # can never produce a rebase conflict
+            git fetch origin
+            git reset --hard origin/main
+
+            for dist in stable unstable; do
+              dir="dists/$dist/main/binary-amd64"
+              [ -d "$dir" ] || continue
+
+              dpkg-scanpackages "$dir" /dev/null > "$dir/Packages"
+              gzip -9c "$dir/Packages" > "$dir/Packages.gz"
+
+              ( cd "dists/$dist"
+                rm -f Release.gpg InRelease
+                {
+                  echo "Origin: Personal Repository"
+                  echo "Label: Personal Packages"
+                  echo "Suite: $dist"
+                  echo "Codename: $dist"
+                  echo "Architectures: amd64"
+                  echo "Components: main"
+                  echo "Description: Personal apt repository"
+                  echo "Date: $(date -R -u)"
+                  echo "MD5Sum:"
+                  find . -type f -name "Packages*" | while read f; do
+                    echo " $(md5sum "$f" | cut -d' ' -f1) $(stat -c%s "$f") ${f#./}"
+                  done
+                  echo "SHA256:"
+                  find . -type f -name "Packages*" | while read f; do
+                    echo " $(sha256sum "$f" | cut -d' ' -f1) $(stat -c%s "$f") ${f#./}"
+                  done
+                } > Release
+                gpg --batch --yes --pinentry-mode loopback --passphrase '' \
+                  --local-user "BF77408A4BF3F3AA1D718E4598AEFED8408B0830" \
+                  --clearsign -o InRelease Release
+                gpg --batch --yes --pinentry-mode loopback --passphrase '' \
+                  --local-user "BF77408A4BF3F3AA1D718E4598AEFED8408B0830" \
+                  --detach-sign -o Release.gpg Release
+              )
+            done
+
+            git add .
+            if git diff --cached --quiet; then
+              echo "index already current - nothing to do"
+              exit 0
+            fi
+            git commit -m "Auto-update apt index"
+
+            git push && exit 0
+            echo "push rejected - remote moved, retrying"
+            sleep 2
+          done
+          echo "push failed after 3 attempts"
+          exit 1

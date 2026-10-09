@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>0hex01 apt repo</title>
+<style>
+  :root { --bg: #0a0f0a; --panel: #101810; --line: #1f3a1f; --green: #0efd0a; --dim: #9fc79f; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--dim);
+         font: 15px/1.6 -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 20px 64px; }
+  header { display: flex; align-items: center; justify-content: space-between;
+           gap: 18px; margin-bottom: 8px; }
+  .logo { width: 225px; height: auto; flex-shrink: 0;
+          filter: drop-shadow(0 0 14px rgba(14,253,10,.55))
+                  drop-shadow(0 0 40px rgba(14,253,10,.25)); }
+  h1 { color: var(--green); font-size: 28px; letter-spacing: 1px; margin: 0 0 4px; }
+  h2 { color: var(--green); font-size: 18px; margin: 36px 0 10px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  p  { margin: 10px 0; }
+  code { color: var(--green); }
+  .codewrap { position: relative; }
+  .codewrap pre { margin: 10px 0; }
+  pre { background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+        padding: 14px 16px; overflow-x: auto; font: 13px/1.5 ui-monospace, monospace; color: #d5ecd5; }
+  .copybtn { position: absolute; top: 8px; right: 8px; display: flex; align-items: center; gap: 4px;
+             background: var(--panel); color: var(--green); border: 1px solid var(--line);
+             border-radius: 6px; padding: 4px 8px; font: 11px ui-monospace, monospace;
+             cursor: pointer; opacity: .65; transition: opacity .15s; }
+  .copybtn:hover { opacity: 1; }
+  .copybtn.copied { color: #fff; border-color: var(--green); opacity: 1; }
+  .tag { color: #5a7a5a; font-size: 12px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--line); }
+  td:first-child { color: var(--green); font-family: ui-monospace, monospace; white-space: nowrap; }
+  a { color: var(--green); }
+  .sig { font-family: ui-monospace, monospace; font-size: 13px; word-break: break-all; }
+  footer { margin-top: 48px; font-size: 12px; color: #4a5f4a; border-top: 1px solid var(--line); padding-top: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>0hex01 apt repo</h1>
+      <p class="tag">Debian 13 (trixie) &middot; amd64 &middot; GPG-signed</p>
+    </div>
+    <img class="logo" src="0hex01_logo_v2.png" alt="0hex01 logo">
+  </header>
+
+  <h2>Quick install</h2>
+  <pre>curl -fsSL https://0hex01.github.io/0hex01-apt-repo-unstable/install.sh | sudo bash</pre>
+  <p>This installs the repo keyring and adds the source, then runs <code>apt update</code>.</p>
+
+  <h2>Manual install</h2>
+  <pre>curl -fsSL https://0hex01.github.io/0hex01-apt-repo-unstable/0hex01.gpg \
+  | sudo tee /usr/share/keyrings/0hex01.gpg
+
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/0hex01.gpg] https://0hex01.github.io/0hex01-apt-repo-unstable unstable main' \
+  | sudo tee /etc/apt/sources.list.d/0hex01.list
+
+sudo apt update</pre>
+
+  <h2>Usage</h2>
+  <pre>apt search 0hex01        # list packages
+sudo apt install &lt;pkg&gt;</pre>
+
+  <h2>Packages</h2>
+  <p>After setup, list everything with <code>apt search 0hex01</code>, or browse the
+     <a href="dists/stable/main/binary-amd64/Packages">live Packages index</a>.</p>
+
+  <h2>Signing key</h2>
+  <p class="sig">BF77 408A 4BF3 F3AA 1D71 8E45 98AE FED8 408B 0830</p>
+  <p>Public key: <a href="0hex01.gpg">0hex01.gpg</a></p>
+
+  <footer>0hex01.github.io/0hex01-apt-repo-unstable &middot; Created by 0hex01.</footer>
+</main>
+<script>
+document.querySelectorAll('pre').forEach(function (pre) {
+  var wrap = document.createElement('div');
+  wrap.className = 'codewrap';
+  pre.parentNode.insertBefore(wrap, pre);
+  wrap.appendChild(pre);
+
+  var btn = document.createElement('button');
+  btn.className = 'copybtn';
+  btn.title = 'Copy to clipboard';
+  btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" ' +
+    'stroke="currentColor" stroke-width="2" stroke-linecap="round" ' +
+    'stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/>' +
+    '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+  btn.addEventListener('click', function () {
+    navigator.clipboard.writeText(pre.innerText).then(function () {
+      btn.classList.add('copied');
+      var old = btn.innerHTML;
+      btn.innerHTML = 'copied';
+      setTimeout(function () {
+        btn.innerHTML = old;
+        btn.classList.remove('copied');
+      }, 1500);
+    });
+  });
+  wrap.appendChild(btn);
+});
+</script>
+</body>
+</html>

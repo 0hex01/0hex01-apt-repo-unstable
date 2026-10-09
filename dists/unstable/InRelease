@@ -1,0 +1,24 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+]633;E;echo "Origin: Personal Repository";7bf78c31-0b4e-4589-a8e9-c9ac1b69c027]633;COrigin: Personal Repository
+Label: Personal Packages
+Suite: unstable
+Codename: unstable
+Architectures: amd64
+Components: main
+Description: Personal apt repository (unstable)
+Date: Fri, 09 Oct 2026 21:33:34 +0000
+MD5Sum:
+ a1fe0ecfbf0e1ec1fe2b0bfbde25635a 29 main/binary-amd64/Packages.gz
+ d41d8cd98f00b204e9800998ecf8427e 0 main/binary-amd64/Packages
+SHA256:
+ 1076b42f110f1204fb803573a7166e6b44ea004e3c155a93d12592c9b3609340 29 main/binary-amd64/Packages.gz
+ e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/binary-amd64/Packages
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQS/d0CKS/Pzqh1xjkWYrv7YQIsIMAUCasldrgAKCRCYrv7YQIsI
+MLCaAQDpxsz49sqSqFq/DC2GMMgQrRGosB/WyNzebjgY+/NCnAEA6jYw4NMQ9UsG
+Td6wkpIeuVfnfNN+F7d8+IhymEH7xQE=
+=9Ok0
+-----END PGP SIGNATURE-----

@@ -1,14 +1,14 @@
-]633;E;echo "Origin: Personal Repository";7bf78c31-0b4e-4589-a8e9-c9ac1b69c027]633;COrigin: Personal Repository
+Origin: Personal Repository
 Label: Personal Packages
 Suite: unstable
 Codename: unstable
 Architectures: amd64
 Components: main
-Description: Personal apt repository (unstable)
-Date: Fri, 09 Oct 2026 21:33:34 +0000
+Description: Personal apt repository
+Date: Fri, 09 Oct 2026 21:33:58 +0000
 MD5Sum:
- a1fe0ecfbf0e1ec1fe2b0bfbde25635a 29 main/binary-amd64/Packages.gz
  d41d8cd98f00b204e9800998ecf8427e 0 main/binary-amd64/Packages
+ 0eb609277dd25aa27def1b7fa69d0860 29 main/binary-amd64/Packages.gz
 SHA256:
- 1076b42f110f1204fb803573a7166e6b44ea004e3c155a93d12592c9b3609340 29 main/binary-amd64/Packages.gz
  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 0 main/binary-amd64/Packages
+ d1073b0d52b082b007cca17f6b770fa3e073ac09604617945cc01bf67f92b96c 29 main/binary-amd64/Packages.gz

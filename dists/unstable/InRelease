@@ -8,17 +8,17 @@ Codename: unstable
 Architectures: amd64
 Components: main
 Description: Personal apt repository
-Date: Fri, 09 Oct 2026 21:42:16 +0000
+Date: Fri, 09 Oct 2026 21:56:15 +0000
 MD5Sum:
  71dbea4cbf7f58e40ed8dd4d6f713aa4 492 main/binary-amd64/Packages
- f279905f2d0c5619190e4dcab352cfe1 388 main/binary-amd64/Packages.gz
+ 782873fbe6aef3a0fc21ec0e89b7aead 388 main/binary-amd64/Packages.gz
 SHA256:
  0b7924027040bb984564cccb9e1194ce216f501693c142823a1fc55b244e462d 492 main/binary-amd64/Packages
- 776c10cf4dd21b5871a7e5f9a81f2337072d94cd161f4e2fdfc0179099774337 388 main/binary-amd64/Packages.gz
+ bd2562914ad8e061080b3317892e308f661a6c2092924fb94565485cf8e20f78 388 main/binary-amd64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYKAB0WIQS/d0CKS/Pzqh1xjkWYrv7YQIsIMAUCaslfuAAKCRCYrv7YQIsI
-MBlKAP9ShBmzNPuREisyHx0DCDwqMAJJudx/sHzxqihY/elpzwD/TVA+MTvsI5sj
-YB/sJRea9ftZQWCTitcEpEo0nLVIFQk=
-=8kMf
+iHUEARYKAB0WIQS/d0CKS/Pzqh1xjkWYrv7YQIsIMAUCasli/wAKCRCYrv7YQIsI
+MG42AP9AMIDU4bXfNGXgHcZ2IQXGObtS1VdeDTQxvV9Gl4jI9AD+NECbgATQ88wM
+TJX5y9P4y7pLDrneQYNBml4V9LRl0wM=
+=ZctP
 -----END PGP SIGNATURE-----

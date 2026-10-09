@@ -5,10 +5,10 @@ Codename: unstable
 Architectures: amd64
 Components: main
 Description: Personal apt repository
-Date: Fri, 09 Oct 2026 22:38:59 +0000
+Date: Fri, 09 Oct 2026 22:42:57 +0000
 MD5Sum:
  3c8c50a4388e676f3ff647d9a5c3d351 504 main/binary-amd64/Packages
- e60b160f2c57b1c8fe079d1cb6957444 387 main/binary-amd64/Packages.gz
+ 3aa9cedb82b9e22daa98c2718ce7a4bf 387 main/binary-amd64/Packages.gz
 SHA256:
  9212d6836a0bdbd3388c51c81015a48e4b5682d6d71c34bf6699e8e9b475d148 504 main/binary-amd64/Packages
- e80b8c1a5570c45b616de881f3bfdbd085cd7aeccad9837786c7539f51757789 387 main/binary-amd64/Packages.gz
+ caed2d9dc332d0605b1c1e986684470cbbd28f215ce3926e28e31f918b1e3bcb 387 main/binary-amd64/Packages.gz

@@ -5,6 +5,7 @@ REPO_DIR="$HOME/0hex01-apt-repo-unstable"
 DIST="unstable"
 COMPONENT="main"
 ARCH="amd64"
+KEY_ID="F68F020A817D6F1F4A1D1EF2619B08066E472D19"
 
 cd "$REPO_DIR" || exit 1
 
@@ -39,5 +40,8 @@ done
 
 echo "Unstable repository metadata updated successfully!"
 
-# unsigned repo - drop any stale signatures
-rm -f Release.gpg InRelease
+# Sign Release file (--yes: overwrite sigs without prompting)
+gpg --batch --yes --pinentry-mode loopback --passphrase '' \
+  --default-key "$KEY_ID" --armor --detach-sign --output Release.gpg Release
+gpg --batch --yes --pinentry-mode loopback --passphrase '' \
+  --default-key "$KEY_ID" --clearsign --output InRelease Release
